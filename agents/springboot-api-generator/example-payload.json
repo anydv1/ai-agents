@@ -1,0 +1,43 @@
+{
+  "entityName": "Product",
+  "description": "Product entity with inventory tracking",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Long",
+      "jpaAnnotations": ["@Id", "@GeneratedValue(strategy = GenerationType.IDENTITY)"],
+      "constraints": []
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "jpaAnnotations": ["@Column(nullable = false, length = 100)"],
+      "constraints": ["@NotBlank", "@Size(min = 3, max = 100)"]
+    },
+    {
+      "name": "price",
+      "type": "BigDecimal",
+      "jpaAnnotations": ["@Column(nullable = false, precision = 10, scale = 2)"],
+      "constraints": ["@NotNull", "@Positive"]
+    },
+    {
+      "name": "quantity",
+      "type": "Integer",
+      "jpaAnnotations": ["@Column(nullable = false)"],
+      "constraints": ["@NotNull", "@PositiveOrZero"]
+    }
+  ],
+  "endpoints": [
+    "GET /api/products",
+    "GET /api/products/{id}",
+    "POST /api/products",
+    "PUT /api/products/{id}",
+    "DELETE /api/products/{id}"
+  ],
+  "database": {
+    "type": "MySQL",
+    "name": "product_db"
+  },
+  "packageName": "com.example.product",
+  "springBootVersion": "3.3.0"
+}
